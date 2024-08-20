@@ -14,6 +14,17 @@ import signal
 import sys
 
 
+
+
+
+# Load configuration
+def load_config(config_file="solar_robot.json"):
+    with open(config_file, 'r') as file:
+        config = json.load(file)
+    return config
+
+config = load_config()
+
 # Set up logging
 log_file = "/var/log/solar_robot.log"
 logging.basicConfig(
@@ -26,13 +37,6 @@ logging.basicConfig(
     ]
 )
 
-# Load configuration
-def load_config(config_file="solar_robot.json"):
-    with open(config_file, 'r') as file:
-        config = json.load(file)
-    return config
-
-config = load_config()
 
 def log(level, message):
     logging.log(level, message)
