@@ -1,0 +1,11 @@
+[Unit]
+Description=Solar Robot Service
+After=network.target
+
+[Service]
+ExecStart=/bin/bash /home/balogh/solar-robot/setup_and_run_solar_robot.sh
+WorkingDirectory=/home/balogh/solar-robot/
+StandardOutput=syslog
+StandardError=syslog
+Restart=always
+
