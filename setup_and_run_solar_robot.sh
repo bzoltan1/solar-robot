@@ -16,6 +16,17 @@ source $VENV_DIR/bin/activate
 echo "Installing required packages..."
 pip install -r requirements.txt
 
+# Ensure the log file exists and has the correct permissions
+LOG_FILE="/var/log/solar_robot.log"
+if [ ! -f "$LOG_FILE" ]; then
+    sudo touch $LOG_FILE
+    sudo chmod 664 $LOG_FILE
+    sudo chown root:$USER $LOG_FILE
+    echo "Created log file at $LOG_FILE"
+else
+    echo "Log file already exists at $LOG_FILE"
+fi
+
 # Run the script
 echo "Starting the script..."
 python3 solar_robot.py

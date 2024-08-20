@@ -13,6 +13,19 @@ import logging
 import signal
 import sys
 
+
+# Set up logging
+log_file = "/var/log/solar_robot.log"
+logging.basicConfig(
+    level=getattr(logging, config["log_level"]),
+    format='[%(asctime)s] %(levelname)s: %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    handlers=[
+        logging.FileHandler(log_file),
+        logging.StreamHandler(sys.stdout)  # Also log to stdout for systemd journal
+    ]
+)
+
 # Load configuration
 def load_config(config_file="solar_robot.json"):
     with open(config_file, 'r') as file:
@@ -20,11 +33,6 @@ def load_config(config_file="solar_robot.json"):
     return config
 
 config = load_config()
-
-# Set up logging
-logging.basicConfig(level=getattr(logging, config["log_level"]),
-                    format='[%(asctime)s] %(levelname)s: %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
 
 def log(level, message):
     logging.log(level, message)
