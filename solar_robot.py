@@ -10,7 +10,8 @@ from astral import LocationInfo
 from astral.sun import sun
 import pytz
 import logging
-
+import signal
+import sys
 
 # Load configuration
 def load_config(config_file="solar_robot.json"):
@@ -27,6 +28,13 @@ logging.basicConfig(level=getattr(logging, config["log_level"]),
 
 def log(level, message):
     logging.log(level, message)
+
+# Graceful exit handling
+def signal_handler(sig, frame):
+    log(logging.INFO, "Received SIGINT (CTRL+C). Exiting gracefully...")
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
 
 def has_passed_event(event_type, city_name, region_name, timezone):
     location = LocationInfo(city_name, region_name)
