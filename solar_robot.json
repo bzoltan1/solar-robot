@@ -1,0 +1,13 @@
+{
+    "solar_panel_ip": "",
+    "shelly_relay_ip": "",
+    "shelly_lamp_ip": "",
+    "high_threshold": 1500,
+    "low_threshold": 500,
+    "state_file": "/tmp/solar_script_state.json",
+    "city_name": "Helsinki",
+    "region_name": "Finland",
+    "timezone": "Europe/Helsinki",
+    "log_level": "INFO"
+}
+
